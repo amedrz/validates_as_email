@@ -1,0 +1,33 @@
+= Validates the format of an string as a valid email address.
+
+== Just put in your Rails model something like:
+
+	class User < ActiveRecord::Base
+		validates_email_format_of :email
+	end
+
+== And it will take care of validate the string under ActiveRecord validations such:
+
+	* validates_presence_of
+	* validates_format_of
+	* validates_length_of
+	* validates_uniqueness_of
+
+== Plus, it includes an extra validation for avoid email-temporary domains like mailinator.com, example:
+
+	class User < ActiveRecord::Base
+		validates_email_format_of :email, :invalid_domains => %w(mailmoat.com mailinator.com fakemail.com)
+	end
+
+== With the :invalid_domains parameter, any email addresses @mailmoat.com, @mailinator.com or @fakemail.com will be rejected.
+
+== TODO:
+	* i18n support.
+	* Make ActiveRecord validations opcionals.
+
+== Inspiration sources:
+	* restful-authentication
+
+Feel free to fork ;)
+
+Amed Rodriguez
