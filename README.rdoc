@@ -24,10 +24,3 @@
 === TODO:
 - i18n support.
 - Make ActiveRecord validations opcionals.
-
-=== Inspiration sources:
-- restful-authentication
-
-Feel free to fork ;)
-
-Amed Rodriguez
