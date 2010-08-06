@@ -10,6 +10,10 @@ require File.join(File.dirname(__FILE__), '../lib/validates_email_format_of')
 
 require File.join(File.dirname(__FILE__), '../init')
 
+I18n.locale = :en
+
+I18n.load_path << File.join(File.dirname(__FILE__), '/locales/en.yml')
+
 def setup_db
    ActiveRecord::Schema.define do
       create_table("users", :force => true) do | t |

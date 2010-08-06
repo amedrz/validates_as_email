@@ -23,17 +23,26 @@ class ValidatesEmailFormatOfTest < Test::Unit::TestCase
       assert_equal(false, UserOne.new(:email => "userinbox.!dcom").valid?)
       assert_equal(false, UserOne.new(:email => "userinbox...com").valid?)
    end
-   
+
+   def test_invalid_formats_message
+      user = UserOne.new(:email => "useroninbox.com")
+      assert_equal(false, user.valid?)
+      assert_equal(1, user.errors.full_messages.size)
+      assert_equal("Email is invalid", user.errors.full_messages[0])
+   end
+
    def test_validate_uniqueness
-      assert_equal(false, UserOne.new(:email => "amed@tractical.com").valid?)
+      user = UserOne.new(:email => "amed@tractical.com")
+      assert_equal(false, user.valid?)
+      assert_equal(1, user.errors.full_messages.size)
+      assert_equal("Email has already been taken", user.errors.full_messages[0])
    end
 
    def test_validate_presence
-      assert_equal(false, UserOne.new(:email => "").valid?)
-   end
-
-   def test_validate_min_length
-      assert_equal(false, UserOne.new(:email => "a@a.c").valid?)
+      user = UserOne.new(:email => "")
+      assert_equal(false, user.valid?)
+      assert_equal(1, user.errors.full_messages.size)
+      assert_equal("Email can't be blank", user.errors.full_messages[0])
    end
 
    def test_valid_domains
@@ -43,6 +52,13 @@ class ValidatesEmailFormatOfTest < Test::Unit::TestCase
    def test_invalid_domains
       assert_equal(false, UserTwo.new(:email => "user@gmail.com").valid?)
       assert_equal(false, UserTwo.new(:email => "user@hotmail.com").valid?)
+   end
+
+   def test_invalid_domains_message
+      user = UserTwo.new(:email => "user@gmail.com")
+      assert_equal(false, user.valid?)
+      assert_equal(1, user.errors.full_messages.size)
+      assert_equal("Email is not allowed, try with another address", user.errors.full_messages[0])
    end
 
 end

@@ -1,0 +1,8 @@
+en:
+   activerecord:
+      errors:
+         messages:
+            blank: "can't be blank"
+            invalid: "is invalid"
+            taken: "has already been taken"
+            invalid_domain_message: "is not allowed, try with another address"
